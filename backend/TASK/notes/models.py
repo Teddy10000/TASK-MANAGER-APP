@@ -6,18 +6,18 @@ from account.models import  *
 class Notes(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(CustomUser, related_name="user", blank=False, null=False,on_delete=models.CASCADE)
-    title = models.CharField(max_length=30, blank=False, null=False)
-    time_created = models.DateTimeField(auto_now_add=True, blank=False, null=False)
-    time_now = models.DateTimeField(blank=False, null=False)
+    time_created = models.DateTimeField(auto_now_add=True, blank=False, null=False) 
+    title = models.CharField(max_length=30, blank=False, null=True,default=None)
+    time_to_complete = models.DateTimeField(blank=True , default =None)
     description = models.TextField(max_length=255, blank=True, null=False)
-    details = models.CharField(max_length  = 255 , null=False, )
     attachments = models.ImageField(blank=True, null=False)
+    details = models.CharField(max_length  = 255 , null=False, default = None)
     completed = models.BooleanField(default=False, null=True, blank=False)
-    
-    
     
     def __str__(self):
         return self.title
+    
+    
     
    # For the category entitle 
 class Category(models.Model):
