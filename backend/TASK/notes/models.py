@@ -1,5 +1,6 @@
 from django.db import models
 from account.models import  *
+from django.urls import reverse
 
 # Create your models here.
 
@@ -14,8 +15,11 @@ class Notes(models.Model):
     details = models.CharField(max_length  = 255 , null=False, default = None)
     completed = models.BooleanField(default=False, null=True, blank=False)
     
-    def __str__(self):
-        return self.title
+    def get_absolute_url(self):
+        return reverse('note_details', args=[str(self.id)])
+        
+    #def __str__(self):
+    #    return self.title
     
     
     
@@ -34,6 +38,9 @@ class Sharing(models.Model):
     shared_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='shared_by')
     shared_with = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='shared_with')
     shared_at = models.DateTimeField(auto_now_add=True)
+    
+    
+    
     
     
     
